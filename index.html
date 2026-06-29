@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shiralyn & Charlie David Nuptial - Wedding Invitation</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Google Fonts for beautiful cursive script -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <!-- Background Music Element -->
+    <audio id="wedding-music" loop>
+        <source src="assets/prayed.mp3" type="audio/mpeg">
+    </audio>
+
+    <!-- Splash / Cover Screen (Phone Notification Theme) -->
+    <div id="splash-screen">
+        <div class="splash-content">
+            
+            <!-- 1. This element appears FIRST and buzzes on its own -->
+            <div class="phone-notification-container">
+                <div class="phone-icon-wrapper">
+                    <span class="phone-emoji">📱</span>
+                    <span class="notification-badge">1</span>
+                </div>
+                
+                <div class="message-bubble">
+                    <div class="message-header">
+                        <span class="app-name">Messenger</span>
+                        <span class="message-time">Just now</span>
+                    </div>
+                    <p class="message-preview">"You have received a wedding invitation..."</p>
+                </div>
+            </div>
+
+            <!-- 2. This container handles the delayed slide-up reveal for the rest of the text -->
+            <div class="reveal-delayed-content">
+                <h1 class="splash-names">Charlie & Shiralyn</h1>
+                <p class="splash-subtext">We would be honored to have you celebrate this special day with us</p>
+                <button id="open-btn" onclick="openInvitation()">Open Invitation</button>
+            </div>
+            
+        </div>
+    </div>
+
+    <!-- Main Invitation Content -->
+    <div id="main-content" class="hidden">
+        
+        <!-- 1. Top Photo Hero Section -->
+        <div class="hero-image-section">
+            <div class="hero-overlay-content">
+                <h2 class="couple-names-script">Charlie David<br><span class="and-text">and</span><br>Shiralyn</h2>
+                <div class="dot-divider">•••••••••••••••••</div>
+                <h3 class="wedding-date-display">DECEMBER 29, 2026</h3>
+                <h4 class="wedding-time-display">01:00 PM</h4>
+            </div>
+            <!-- Floating Audio Control Icon -->
+            <div class="audio-icon-container" onclick="toggleAudio()">
+                <span id="audio-status-icon">🔊</span>
+            </div>
+        </div>
+
+        <!-- 2. Clean White/Textured Content Area Below -->
+        <div class="content-body-section">
+            
+            <!-- Countdown Block (Formatted exactly like 4446.jpg) -->
+            <div id="countdown-line-container">
+                <div class="time-line-block">
+                    <span id="days">00</span>
+                    <p>DAYS</p>
+                </div>
+                <div class="time-line-block">
+                    <span id="hours">00</span>
+                    <p>HOURS</p>
+                </div>
+                <div class="time-line-block">
+                    <span id="minutes">00</span>
+                    <p>MINUTES</p>
+                </div>
+                <div class="time-line-block">
+                    <span id="seconds">00</span>
+                    <p>SECONDS</p>
+                </div>
+            </div>
+
+            <!-- Our Love Story Section -->
+            <section class="love-story">
+                <h3 class="story-title-script">Our Story</h3>
+                <div class="story-text">
+                    <p>Every love story has a beginning, and theirs started in the simplest way imaginable—a single "Hello" on Messenger.</p>
+                    <p>When Charlie first sent his message, she didn't think much of it. In fact, she left it unanswered for a while. She barely knew who Charlie was, and replying to a stranger wasn't something she usually did. But deep inside, she believed that a little kindness could go a long way. Not wanting to ignore someone who had reached out, she finally replied with a simple "Hi."</p>
+                    <p>Neither of them knew that such an ordinary conversation would become the first page of an extraordinary love story.</p>
+                    <p>What began as casual chats slowly turned into daily conversations. They talked about life, shared laughter, exchanged stories, and discovered pieces of each other they had never expected to find. Day after day, they grew more comfortable, and what once felt like conversations between strangers soon became moments they both looked forward to.</p>
+                    <p>As time passed, their friendship deepened. They became each other's source of comfort during difficult days, their biggest cheerleaders during happy moments, and the person they couldn't wait to talk to at the end of each day. Without realizing it, the bond they had built through countless messages, late-night conversations, and shared dreams had grown into something far more meaningful.</p>
+                    <p class="highlight-story-text">Friendship slowly turned into love.</p>
+                    <p>Their relationship wasn't built overnight or through grand romantic gestures. It grew through patience, trust, understanding, and the little moments that often go unnoticed. It was the simple conversations, the genuine care they showed one another, and the unwavering support they gave each other that laid the foundation for a love that would last.</p>
+                    <p>Looking back, it's almost impossible to believe that everything began with one small message. A "Hello" that was once ignored became the beginning of a journey filled with laughter, memories, challenges, and countless blessings.</p>
+                    <p>Today, they stand hand in hand, grateful for every conversation that brought them closer, every lesson that strengthened their bond, and every step that led them to this beautiful chapter of their lives.</p>
+                    <p class="highlight-story-text">Who would have thought that a simple "Hello" and an unexpected "Hi" would become the beginning of forever?</p>
+                    <p>And now, with hearts full of love and gratitude, Charlie and Shiralyn are ready to write the next chapter of their story—together, as husband and wife.</p>
+                </div>
+                <!-- Photo after story -->
+                <img src="assets/imagesa.jfif" alt="Charlie and Shiralyn" class="invitation-card">
+            </section>
+
+            <!-- Entourage Cards Stack Section -->
+        <section class="entourage-cards">
+            <div class="invitation-container">
+                <!-- First Card -->
+                <img src="assets/1.png" alt="Wedding Celebration" class="animated-card">
+
+                <!-- Second Card -->
+                <img src="assets/2.png" alt="Bridal Entourage" class="animated-card">
+
+                <!-- Third Card -->
+                <img src="assets/3.png" alt="Bridal Party" class="animated-card">
+
+                <!-- Fourth Card -->
+                <img src="assets/4.png" alt="Secondary Sponsors" class="animated-card">
+
+                <!-- Fifth Card -->
+                <img src="assets/5.png" alt="Junior Entourage" class="animated-card">
+
+                <!-- Sixth Card -->
+                <img src="assets/6.png" alt="Junior Entourage" class="animated-card">
+            </div>
+        </section>
+
+            <!-- Prenup Media Section -->
+            <section class="prenup-media">
+                <h3 class="section-heading">Our Prenup Video</h3>
+                <video controls width="100%" class="invitation-video">
+                    <source src="assets/prenup-video.mp4" type="video/mp4">
+                </video>
+                <img src="assets/prenup-photo.jpg" alt="Prenup Memories" class="invitation-card" style="margin-top: 2rem;">
+            </section>
+
+            <!-- THE VENUE SECTION -->
+<div class="venue-section">
+    <h2>THE VENUE</h2>
+    <img src="assets/sholem.png" alt="Sholem Grill & Restaurant">
+    <img src="assets/sho.jpg" alt="Sholem Grill & Restaurant">
+    <h3>Sholem Grill & Restaurant Mactan</h3>
+    <p>Mactan Proper, Going to Punta Engaño, before Mactan Shrine.</p>
+    
+    <!-- ⬇️ PASTE THE RSVP BUTTON RIGHT HERE ⬇️ -->
+    <button id="rsvp-btn">RSVP Here</button>
+</div>
+    
+    <!-- RSVP Modal Popup with Google Form -->
+    <div id="rsvp-modal" class="modal">
+        <div class="modal-content" style="max-width: 640px; padding: 10px;">
+            <span class="close-modal" style="color: #000; right: 15px; top: 10px;">&times;</span>
+            <iframe src="https://forms.gle/EMwcPpa6wHhTgJmg9" width="100%" height="600" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,506 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    background-color: #032b1d; /* Fallback deep green */
+    color: #ffffff;
+    overflow-x: hidden;
+}
+
+body.locked {
+    overflow: hidden;
+}
+
+/* Splash Screen Cover Styles */
+#splash-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    
+    /* 🖼️ REPLACE 'your-cover-photo.jpg' WITH your actual image filename below */
+   background: linear-gradient(rgba(3, 43, 29, 0.75), rgba(3, 43, 29, 0.75)), 
+                url('assets/wedding.jpg') center/cover no-repeat;
+                
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: white;
+    z-index: 9999;
+    transition: transform 0.8s ease-in-out, opacity 0.8s ease-in-out;
+}
+
+/* Splash Screen Cover Styles */
+#splash-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: linear-gradient(rgba(3, 43, 29, 0.85), rgba(3, 43, 29, 0.85)), 
+                url('assets/wedding.jpg') center/cover no-repeat;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: white;
+    z-index: 9999;
+    transition: transform 0.8s cubic-bezier(0.77, 0, 0.175, 1), opacity 0.8s ease-in-out;
+}
+
+#splash-screen.fade-out {
+    transform: translateY(-100vh);
+    opacity: 0;
+}
+
+.splash-content {
+    width: 90%;
+    max-width: 400px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* --- STEP 1: PHONE INTRO & CONTINUOUS VIBRATION --- */
+.phone-notification-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    width: 100%;
+    
+    /* Flies into the screen right at the start */
+    animation: flyInNotification 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+
+.phone-icon-wrapper {
+    position: relative;
+    font-size: 3.5rem;
+    display: inline-block;
+    /* High frequency buzzing loop */
+    animation: phoneBuzz 1.5s infinite ease-in-out;
+    animation-delay: 0.6s; /* Starts vibrating right after flying in */
+}
+
+.notification-badge {
+    position: absolute;
+    top: 2px;
+    right: -5px;
+    background-color: #ff3b30;
+    color: white;
+    font-size: 0.75rem;
+    font-weight: bold;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+}
+
+.message-bubble {
+    background: rgba(255, 255, 255, 0.98);
+    color: #333333;
+    border-radius: 12px;
+    padding: 10px 14px;
+    margin-top: 1rem;
+    width: 100%;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+    text-align: left;
+    border-left: 4px solid #d4af37;
+}
+
+.message-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 4px;
+}
+
+.app-name {
+    font-size: 0.7rem;
+    font-weight: 700;
+    color: #0084ff;
+    text-transform: uppercase;
+}
+
+.message-time {
+    font-size: 0.65rem;
+    color: #888888;
+}
+
+.message-preview {
+    font-size: 0.8rem;
+    font-weight: 500;
+    line-height: 1.3;
+    color: #111111;
+}
+
+/* --- STEP 2: STAGGERED REVEAL FOR NAMES & BUTTON (Hidden at first) --- */
+.reveal-delayed-content {
+    opacity: 0;
+    transform: translateY(30px);
+    
+    /* Waits 1.5 seconds for the phone intro/buzzing scene to showcase before entering */
+    animation: revealContentIntoView 0.8s cubic-bezier(0.16, 1, 0.3, 1) 1.5s forwards;
+    
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.splash-names {
+    font-size: 2.2rem;
+    font-weight: 600;
+    margin-top: 1rem;
+    margin-bottom: 0.5rem;
+    color: #ffffff;
+}
+
+.splash-subtext {
+    font-size: 0.9rem;
+    opacity: 0.9;
+    line-height: 1.4;
+    margin-bottom: 2rem;
+}
+
+/* --- ANIMATION TIMELINES --- */
+
+/* Notification Fly In */
+@keyframes flyInNotification {
+    0% {
+        opacity: 0;
+        transform: translateY(-50px) scale(0.8);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* Phone Buzz Movement */
+@keyframes phoneBuzz {
+    0% { transform: translate(0, 0) rotate(0deg); }
+    5% { transform: translate(-2px, 1px) rotate(-2deg); }
+    10% { transform: translate(1px, -1px) rotate(2deg); }
+    15% { transform: translate(-1px, 2px) rotate(-1deg); }
+    20% { transform: translate(2px, 1px) rotate(2deg); }
+    25% { transform: translate(0, 0) rotate(0deg); }
+    100% { transform: translate(0, 0) rotate(0deg); } /* Short pause between vibes */
+}
+
+/* Text and Open Button Reveal Sequence */
+@keyframes revealContentIntoView {
+    0% {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+#open-btn {
+    margin-top: 2rem;
+    padding: 12px 30px;
+    background-color: #d4af37;
+    color: #032b1d;
+    border: none;
+    border-radius: 25px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.hidden {
+    display: none;
+}
+
+/* --- HERO IMAGE BACKGROUND AREA (TOP HALF) --- */
+.hero-image-section {
+    position: relative;
+    width: 100%;
+    height: 65vh;
+    background: linear-gradient(rgba(0, 0, 0, 0.35), rgba(0, 0, 0, 0.45)), 
+            url('assets/couple.jpg') center/cover no-repeat;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: #ffffff;
+}
+
+.hero-overlay-content {
+    padding: 0 1rem;
+    margin-top: 2rem;
+}
+
+.couple-names-script {
+    font-family: 'Alex Brush', cursive;
+    font-size: 3.8rem;
+    line-height: 0.9;
+    font-weight: 400;
+    color: #d4af37; /* Gold Font */
+    text-shadow: 2px 2px 8px rgba(0,0,0,0.6);
+}
+
+.and-text {
+    font-size: 1.8rem;
+    font-style: italic;
+    font-family: 'Georgia', serif;
+    color: #ffffff;
+}
+
+.dot-divider {
+    letter-spacing: 4px;
+    margin: 1rem 0;
+    font-size: 1.2rem;
+    color: #d4af37; /* Gold Font */
+}
+
+.wedding-date-display {
+    font-size: 1.4rem;
+    font-weight: 400;
+    letter-spacing: 2px;
+    margin-bottom: 0.3rem;
+    color: #ffffff;
+    text-shadow: 1px 1px 4px rgba(0,0,0,0.5);
+}
+
+.wedding-time-display {
+    font-size: 1.2rem;
+    font-weight: 300;
+    letter-spacing: 1px;
+    color: #ffffff;
+    text-shadow: 1px 1px 4px rgba(0,0,0,0.5);
+}
+
+.audio-icon-container {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    font-size: 1.8rem;
+    cursor: pointer;
+    background: rgba(0,0,0,0.3);
+    padding: 8px;
+    border-radius: 50%;
+    width: 45px;
+    height: 45px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* --- BOTTOM CONTENT AREA WITH YOUR CUSTOM BACKGROUND --- */
+.content-body-section {
+    /* 🖼️ REPLACEMENT: Put your background image filename below in url('assets/YOUR_FILE_NAME') */
+    background: linear-gradient(rgba(3, 43, 29, 0.85), rgba(3, 43, 29, 0.85)), url('assets/wedding.jpg') center/cover fixed no-repeat;
+    padding: 3.5rem 0;
+}
+
+/* Countdown Underline Style */
+#countdown-line-container {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    max-width: 450px;
+    margin: 0 auto 3rem auto;
+    padding: 0 1rem;
+}
+
+.time-line-block {
+    text-align: center;
+    width: 70px;
+}
+
+.time-line-block span {
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: #d4af37; /* Gold Font for numbers */
+    display: block;
+    padding-bottom: 5px;
+    border-bottom: 2px solid #d4af37; /* Gold Underline */
+}
+
+.time-line-block p {
+    font-size: 0.7rem;
+    font-weight: 600;
+    color: #ffffff;
+    margin-top: 8px;
+    letter-spacing: 0.5px;
+}
+
+/* Section Configurations Layout */
+section {
+    padding: 3rem 1.5rem;
+    max-width: 480px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.story-title-script {
+    font-family: 'Alex Brush', cursive;
+    font-size: 3.5rem;
+    color: #d4af37; /* Gold Font */
+    margin-bottom: 2rem;
+    font-weight: 400;
+}
+
+.section-heading {
+    font-size: 1.5rem;
+    color: #d4af37; /* Gold Font */
+    letter-spacing: 1px;
+    margin-bottom: 1.5rem;
+    text-transform: uppercase;
+}
+
+.story-text p {
+    font-size: 0.95rem;
+    line-height: 1.8;
+    color: #f5f5f5;
+    margin-bottom: 1.5rem;
+    text-align: justify;
+}
+
+.highlight-story-text {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #d4af37; /* Gold Font */
+    margin: 1.5rem 0;
+    font-style: italic;
+}
+
+/* Image Assets Stack Layout */
+.card-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem;
+}
+
+.invitation-card, .invitation-video {
+    width: 100%;
+    height: auto;
+    border-radius: 4px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.4);
+    border: 1px solid rgba(212, 175, 55, 0.3); /* Soft Gold Frame */
+}
+
+/* Center alignment for the entire Venue area */
+.venue-section {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 20px;
+}
+
+/* Make sure the venue image stays centered */
+.venue-section img {
+    display: block;
+    margin: 0 auto 15px auto;
+    max-width: 100%;
+    height: auto;
+}
+
+/* The Modal Background (Hidden by default) */
+.modal {
+    display: none; 
+    position: fixed; 
+    z-index: 10000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(5px);
+    justify-content: center;
+    align-items: center;
+}
+
+/* The Modal Content Box */
+.modal-content {
+    background-color: white;
+    border-radius: 15px;
+    position: relative;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+}
+
+/* The Close Button */
+.close-modal {
+    position: absolute;
+    font-size: 32px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+#rsvp-btn {
+    background-color: #d4af37; /* Elegant Gold */
+    color: #032b1d;            /* Dark Green text */
+    border: none;
+    padding: 12px 30px;
+    font-size: 18px;
+    font-weight: bold;
+    border-radius: 25px;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+    transition: all 0.3s ease;
+    margin-top: 20px;
+}
+
+#rsvp-btn:hover {
+    background-color: #f3e5ab; /* Soft gold shimmer */
+    transform: translateY(-2px); /* Gentle lift effect */
+}
+
+/* 1. Define how the cards should move and fade in */
+/* 1. Base state: hidden and shifted down */
+/* Container that centers the cards and limits their size */
+.invitation-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px; /* Space between the cards */
+    width: 100%;
+    max-width: 450px; /* Perfect width for mobile viewing */
+    margin: 0 auto; /* Centers the container on the screen */
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+/* Force the cards to shrink and scale down perfectly */
+.animated-card, .invitation-card {
+    width: 130%;
+    height: auto;
+    max-width: 130%;
+    display: block;
+    border-radius: 12px; /* Softens the card edges beautifully */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3); /* Adds a premium depth shadow */
+}
+.animated-card {
+    opacity: 0; 
+    transform: translateY(40px);
+    transition: opacity 1.2s ease, transform 1.2s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+/* 2. When scrolled into view, slide up and fade in smoothly */
+.animated-card.start-animation {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* 3. The beautiful cascading delay for each card sequence */
+.animated-card.start-animation:nth-child(1) { transition-delay: 0.4s; }
+.animated-card.start-animation:nth-child(2) { transition-delay: 0.6s; }
+.animated-card.start-animation:nth-child(3) { transition-delay: 0.9s; }
+.animated-card.start-animation:nth-child(4) { transition-delay: 1.1s; }
+.animated-card.start-animation:nth-child(5) { transition-delay: 1.3s; }
+.animated-card.start-animation:nth-child(6) { transition-delay: 1.5s; }
